@@ -1,9 +1,9 @@
 """A collection of data checks."""
 import inspect
 
-from datachecks.data_checks import DataCheck
-from datachecks.exceptions import DataCheckInitError
-from datachecks.utils import infer_feature_types
+from checkmate.data_checks import DataCheck
+from checkmate.exceptions import DataCheckInitError
+from checkmate.utils import infer_feature_types
 
 
 def _has_defaults_for_all_args(init):

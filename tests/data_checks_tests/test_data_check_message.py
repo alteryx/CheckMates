@@ -1,6 +1,6 @@
 import pytest
 
-from datachecks.data_checks import (
+from checkmate.data_checks import (
     DataCheckActionCode,
     DataCheckActionOption,
     DataCheckError,

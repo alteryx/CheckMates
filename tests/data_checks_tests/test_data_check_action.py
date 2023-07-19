@@ -1,6 +1,6 @@
 import pytest
 
-from datachecks.data_checks import DataCheckAction, DataCheckActionCode
+from checkmate.data_checks import DataCheckAction, DataCheckActionCode
 
 
 def test_data_check_action_attributes(dummy_data_check_name):

@@ -1,11 +1,11 @@
 """Recommended action returned by a DataCheck."""
 from enum import Enum
 
-from datachecks.data_checks.datacheck_meta.data_check_action import DataCheckAction
-from datachecks.data_checks.datacheck_meta.data_check_action_code import (
+from checkmate.data_checks.datacheck_meta.data_check_action import DataCheckAction
+from checkmate.data_checks.datacheck_meta.data_check_action_code import (
     DataCheckActionCode,
 )
-from datachecks.utils import classproperty
+from checkmate.utils import classproperty
 
 
 class DataCheckActionOption:
