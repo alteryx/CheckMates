@@ -11,4 +11,4 @@ jobs:
         id: check-linked-issues
         with:
           exclude-branches: "release_v**, backport_v**, main, latest-dep-update-**, min-dep-update-**, dependabot/**"
-          github-token: ${{ secrets.CHECKMATE_TOKEN }}
+          github-token: ${{ secrets.REPO_SCOPED_TOKEN }}
