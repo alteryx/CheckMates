@@ -256,7 +256,7 @@ epub_exclude_files = ["search.html"]
 
 # -- Extension configuration -------------------------------------------------
 
-# If evalml is open-sourced: replace github specific style.css
+# If checkmate is open-sourced: replace github specific style.css
 extlinks = {
     "issue": ("https://github.com/alteryx/checkmate/issues/%s", "#"),
     "pr": ("https://github.com/alteryx/checkmate/pull/%s", "#"),
