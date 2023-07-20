@@ -3,6 +3,7 @@ Release Notes
 **Future Releases**
     * Enhancements
         * Added repo specific token for workflows :pr:`2`
+        * PDM Packaging ready for deployment
     * Fixes
     * Changes
         * Irrelevant workflows removed (`minimum_dependency_checker`) :pr:`2`
