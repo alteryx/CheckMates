@@ -1,4 +1,4 @@
-"""General datachecks directory."""
+"""General checkmate directory."""
 
 from checkmate.data_checks.checks.data_check import DataCheck
 from checkmate.data_checks.datacheck_meta.data_check_message_code import (

@@ -1,6 +1,6 @@
 # CheckMate
 
-CheckMate is an AutoML library which catches and warns of problems with your data and problem setup before modeling.
+CheckMate is an Alteryx Open Source library which catches and warns of problems with your data and problem setup before modeling.
 
 ## Installation
 

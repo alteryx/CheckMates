@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-- As a [user/developer], I wish I could use DataChecks to ...
+- As a [user/developer], I wish I could use CheckMate to ...
 
 #### Code Example
 
