@@ -21,6 +21,10 @@ lint-fix:
 	black . --config=./pyproject.toml
 	ruff . --config=./pyproject.toml --fix
 
+.PHONY: test
+test:
+	pytest tests
+
 .PHONY: installdeps
 installdeps:
 	pip install --upgrade pip
