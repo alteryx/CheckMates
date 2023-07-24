@@ -23,7 +23,7 @@ lint-fix:
 
 .PHONY: test
 test:
-	pytest tests
+	pytest tests/
 
 .PHONY: installdeps
 installdeps:
