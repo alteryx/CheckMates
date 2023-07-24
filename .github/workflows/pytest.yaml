@@ -31,5 +31,8 @@ jobs:
           make installdeps
           make installdeps-test
           pip freeze
+          deactivate
       - name: Run Pytest
-        run: pytest tests/
+        run: |
+          source test_python/bin/activate
+          pytest tests/
