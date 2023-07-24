@@ -4,12 +4,14 @@ Release Notes
     * Enhancements
         * Added repo specific token for workflows :pr:`2`
         * PDM Packaging ready for deployment :pr:`2`
+        * Added testing workflow for pytest :pr:`2`
     * Fixes
     * Changes
         * Irrelevant workflows removed (`minimum_dependency_checker`) :pr:`2`
     * Documentation Changes
         * Documentation refactored to now fit CheckMate :pr:`2`
     * Testing Changes
+        * Automated testing within github actions :pr:`2`
 
 **v0.0.1 July 18, 2023**
 
