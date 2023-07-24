@@ -35,4 +35,4 @@ jobs:
       - name: Run Pytest
         run: |
           source test_python/bin/activate
-          pytest tests/
+          make test
