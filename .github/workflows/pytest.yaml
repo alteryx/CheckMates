@@ -32,4 +32,4 @@ jobs:
           make installdeps-test
           pip freeze
       - name: Run Pytest
-        run: pytest tests
+        run: pytest tests/
