@@ -1,13 +1,13 @@
 """Data check that checks if any of the features are likely to be ID columns."""
 
-from checkmate.data_checks import (
+from checkers.data_checks import (
     DataCheck,
     DataCheckActionCode,
     DataCheckActionOption,
     DataCheckMessageCode,
     DataCheckWarning,
 )
-from checkmate.utils import infer_feature_types
+from checkers.utils import infer_feature_types
 
 
 class IDColumnsDataCheck(DataCheck):

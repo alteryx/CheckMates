@@ -1,9 +1,9 @@
 """Recommended action returned by a DataCheck."""
 
-from checkmate.data_checks.datacheck_meta.data_check_action_code import (
+from checkers.data_checks.datacheck_meta.data_check_action_code import (
     DataCheckActionCode,
 )
-from checkmate.data_checks.datacheck_meta.utils import handle_data_check_action_code
+from checkers.data_checks.datacheck_meta.utils import handle_data_check_action_code
 
 
 class DataCheckAction:

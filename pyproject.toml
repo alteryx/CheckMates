@@ -1,8 +1,8 @@
 
 [project]
-name = "CheckMate"
+name = "Checkers"
 version = "0.0.2"
-description = "CheckMate is an AutoML library which catches and warns of problems with your data and problem setup before modeling."
+description = "Checkers is an AutoML library which catches and warns of problems with your data and problem setup before modeling."
 authors = [
     {name = "Nabil Fayak", email = "nabil.fayak@alteryx.com"},
 ]
@@ -84,13 +84,13 @@ ignore = ["E501", "D107", "D401"]
 "docs/**" = ["D"]
 
 [tool.ruff.isort]
-known-first-party = ["checkmate"]
+known-first-party = ["checkers"]
 
 [tool.ruff.pydocstyle]
 convention = "google"
 
 [tool.coverage.run]
-source = ["checkmate"]
+source = ["checkers"]
 
 [tool.coverage.report]
 exclude_lines =[

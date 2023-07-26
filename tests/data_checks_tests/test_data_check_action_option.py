@@ -2,12 +2,12 @@ import re
 
 import pytest
 
-from checkmate.data_checks import (
+from checkers.data_checks import (
     DataCheckActionCode,
     DataCheckActionOption,
     DCAOParameterType,
 )
-from checkmate.data_checks.datacheck_meta.data_check_action import DataCheckAction
+from checkers.data_checks.datacheck_meta.data_check_action import DataCheckAction
 
 
 def test_data_check_action_option_attributes(dummy_data_check_name):
