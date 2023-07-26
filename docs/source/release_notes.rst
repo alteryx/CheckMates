@@ -5,6 +5,7 @@ Release Notes
     * Fixes
     * Changes
     * Documentation Changes
+        * Documentation refactored to now fit `Checkers` :pr:`3`
     * Testing Changes
 
 **v0.0.2 July 26, 2023**
