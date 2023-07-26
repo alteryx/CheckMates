@@ -1,6 +1,6 @@
 """The supported types of machine learning problems."""
-from datachecks.problem_types.problem_types import ProblemTypes
-from datachecks.problem_types.utils import (
+from checkmate.problem_types.problem_types import ProblemTypes
+from checkmate.problem_types.utils import (
     handle_problem_types,
     detect_problem_type,
     is_regression,

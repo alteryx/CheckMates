@@ -1,5 +1,5 @@
 """Utility methods for the data checks in DataChecks."""
-from datachecks.data_checks.datacheck_meta.data_check_action_code import (
+from checkmate.data_checks.datacheck_meta.data_check_action_code import (
     DataCheckActionCode,
 )
 

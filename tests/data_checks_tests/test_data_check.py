@@ -1,8 +1,8 @@
 import pandas as pd
 import pytest
 
-from datachecks.data_checks.checks.data_check import DataCheck
-from datachecks.data_checks.datacheck_meta.data_check_message import (
+from checkmate.data_checks.checks.data_check import DataCheck
+from checkmate.data_checks.datacheck_meta.data_check_message import (
     DataCheckError,
     DataCheckWarning,
 )

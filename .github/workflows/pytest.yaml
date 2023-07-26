@@ -1,0 +1,38 @@
+name: Pytest Tests
+on:
+  pull_request:
+    types: [opened, synchronize]
+  push:
+    branches:
+      - main
+jobs:
+  pytest_check:
+    name: Python ${{ matrix.python_version }} pytest test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python_version: ["3.9"]
+    steps:
+      - name: Set up Python ${{ matrix.python_version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python_version }}
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          fetch-depth: 2
+      - name: Installing Dependencies
+        run: |
+          pip install virtualenv
+          virtualenv test_python -q
+          source test_python/bin/activate
+          make installdeps
+          make installdeps-test
+          pip freeze
+          deactivate
+      - name: Run Pytest
+        run: |
+          source test_python/bin/activate
+          make test

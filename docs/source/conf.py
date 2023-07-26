@@ -20,7 +20,7 @@ from pathlib import Path
 from sphinx.domains.python import PythonDomain
 from sphinx.ext.autodoc import Documenter, MethodDocumenter
 
-import datachecks
+import checkmate
 
 path = os.path.join("..", "..")
 sys.path.insert(0, os.path.abspath(path))
@@ -33,9 +33,9 @@ copyright = "2023, Alteryx, Inc."
 author = "Alteryx, Inc."
 
 # The short X.Y version
-version = datachecks.__version__
+version = checkmate.__version__
 # The full version, including alpha/beta/rc tags
-release = datachecks.__version__
+release = checkmate.__version__
 
 
 # -- General configuration ---------------------------------------------------
@@ -256,7 +256,7 @@ epub_exclude_files = ["search.html"]
 
 # -- Extension configuration -------------------------------------------------
 
-# If evalml is open-sourced: replace github specific style.css
+# If checkmate is open-sourced: replace github specific style.css
 extlinks = {
     "issue": ("https://github.com/alteryx/checkmate/issues/%s", "#"),
     "pr": ("https://github.com/alteryx/checkmate/pull/%s", "#"),
