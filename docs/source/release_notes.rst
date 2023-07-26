@@ -5,8 +5,8 @@ Release Notes
     * Fixes
     * Changes
     * Documentation Changes
-        * Documentation refactored to now fit `Checkers` :pr:`4`
     * Testing Changes
+
 
 **v0.0.2 July 26, 2023**
     * Enhancements
@@ -17,6 +17,7 @@ Release Notes
         * Irrelevant workflows removed (`minimum_dependency_checker`) :pr:`2`
     * Documentation Changes
         * Documentation refactored to now fit CheckMate :pr:`2`
+        * Documentation refactored to now fit `Checkers` :pr:`4`
     * Testing Changes
         * Automated testing within github actions :pr:`2`
 
