@@ -1,7 +1,7 @@
 
 [project]
 name = "CheckMate"
-version = "0.1.3"
+version = "0.0.2"
 description = "CheckMate is an AutoML library which catches and warns of problems with your data and problem setup before modeling."
 authors = [
     {name = "Nabil Fayak", email = "nabil.fayak@alteryx.com"},
