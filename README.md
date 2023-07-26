@@ -1,6 +1,6 @@
-# CheckMate
+# Checkers
 
-CheckMate is an Alteryx Open Source library which catches and warns of problems with your data and problem setup before modeling.
+Checkers is an Alteryx Open Source library which catches and warns of problems with your data and problem setup before modeling.
 
 ## Installation
 
@@ -8,19 +8,19 @@ CheckMate is an Alteryx Open Source library which catches and warns of problems 
 
 ## Next Steps
 
-Read more about CheckMate on our [documentation page](#):
+Read more about Checkers on our [documentation page](#):
 
 ## Support
 
-The CheckMate community is happy to provide support to users of CheckMate. Project support can be found in four places depending on the type of question:
-1. For usage questions, use [Stack Overflow](#) with the `checkmate` tag.
+The Checkers community is happy to provide support to users of Checkers. Project support can be found in four places depending on the type of question:
+1. For usage questions, use [Stack Overflow](#) with the `checkers` tag.
 2. For bugs, issues, or feature requests start a [Github issue](#).
 3. For discussion regarding development on the core library, use [Slack](#).
 4. For everything else, the core developers can be reached by email at open_source_support@alteryx.com
 
 ## Built at Alteryx
 
-**CheckMate** is an open source project built by [Alteryx](https://www.alteryx.com). To see the other open source projects we’re working on visit [Alteryx Open Source](https://www.alteryx.com/open-source). If building impactful data science pipelines is important to you or your business, please get in touch.
+**Checkers** is an open source project built by [Alteryx](https://www.alteryx.com). To see the other open source projects we’re working on visit [Alteryx Open Source](https://www.alteryx.com/open-source). If building impactful data science pipelines is important to you or your business, please get in touch.
 
 <p align="center">
   <a href="https://www.alteryx.com/open-source">

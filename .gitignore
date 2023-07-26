@@ -1,4 +1,4 @@
 .venv/
 **/__pycache__/
 .DS_Store
-CheckMate.egg-info/
+Checkers.egg-info/
