@@ -2,12 +2,15 @@ Release Notes
 -------------
 **Future Releases**
     * Enhancements
+        * *First PyPi Release* :pr:`8`
     * Fixes
-        * Cleanup files and add release workflow :pr:`6`
     * Changes
     * Documentation Changes
     * Testing Changes
 
+**v0.1.0 July 27, 2023**
+* Fixes
+    * Cleanup files and add release workflow :pr:`6`
 
 **v0.0.2 July 26, 2023**
     * Enhancements
@@ -41,4 +44,4 @@ Release Notes
 
 **v0.0.0 July 3, 2023**
 
-* *First Release*
+* *GitHub Repo Created*
