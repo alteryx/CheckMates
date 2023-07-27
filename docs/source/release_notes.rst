@@ -3,6 +3,7 @@ Release Notes
 **Future Releases**
     * Enhancements
     * Fixes
+        * Cleanup files and add release workflow :pr:`6`
     * Changes
     * Documentation Changes
     * Testing Changes
