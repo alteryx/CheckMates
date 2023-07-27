@@ -12,7 +12,7 @@ We currently utilize GitHub Issues as our project management tool for datachecks
 
 #### 1. Clone repo
 The code is hosted on GitHub, so you will need to use Git to clone the project and make changes to the codebase. Once you have obtained a copy of the code, you should create a development environment that is separate from your existing Python environment so that you can make and test changes without compromising your own work environment. Additionally, you must make sure that the version of Python you use is at least 3.8. Using `conda` you can use `conda create -n datachecks python=3.8` and `conda activate datachecks` before the following steps.
-* clone with `git clone [https://github.com/NabilFayak/datachecks.git]`
+* clone with `git clone [https://github.com/alteryx/Checkers.git]`
 * install in edit mode with:
     ```bash
     # move into the repo
