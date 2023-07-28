@@ -1,7 +1,7 @@
 
 [project]
 name = "Checkers"
-version = "0.0.2"
+version = "0.1.0"
 description = "Checkers is an AutoML library which catches and warns of problems with your data and problem setup before modeling."
 authors = [
     {name = "Nabil Fayak", email = "nabil.fayak@alteryx.com"},
@@ -16,6 +16,10 @@ dependencies = [
 requires-python = ">=3.8,<4.0"
 readme = "README.md"
 license = {text = "BSD-3-Clause"}
+
+[project.urls]
+"Source Code"= "https://github.com/alteryx/Checkers/"
+"Issue Tracker" = "https://github.com/alteryx/Checkers/issues"
 
 [project.optional-dependencies]
 docs = [
