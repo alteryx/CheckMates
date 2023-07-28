@@ -1,7 +1,7 @@
 """Base class for all data checks."""
 from abc import ABC, abstractmethod
 
-from checkers.utils import classproperty
+from checkmates.utils import classproperty
 
 
 class DataCheck(ABC):

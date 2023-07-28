@@ -1,5 +1,5 @@
 """Exceptions used in DataChecks."""
-from checkers.exceptions.exceptions import (
+from checkmates.exceptions.exceptions import (
     DataCheckInitError,
     MissingComponentError,
     ValidationErrorCode,

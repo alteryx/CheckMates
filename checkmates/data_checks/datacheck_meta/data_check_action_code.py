@@ -1,7 +1,7 @@
 """Enum for data check action code."""
 from enum import Enum
 
-from checkers.utils import classproperty
+from checkmates.utils import classproperty
 
 
 class DataCheckActionCode(Enum):

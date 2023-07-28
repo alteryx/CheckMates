@@ -28,8 +28,9 @@ Release Notes
     * Restructured file directory to categorize data checks between `datacheck_meta` and `checks` :pr:`1`
     * Restructured pdm packaging to only be relevant to `DataChecks`, now to be renamed to `CheckMate` :pr:`1`
 * Documentation Changes
-    * Documentation refactored to now fit `CheckMate` :pr:`2`
+    * Documentation refactored to now fit `CheckMates` :pr:`10`
     * Documentation refactored to now fit `Checkers` :pr:`4`
+    * Documentation refactored to now fit `CheckMate` :pr:`2`
 * Testing Changes
     * Automated testing within github actions :pr:`2`
     * Removed integration testing due to irrelevance with `datacheck_meta` and `checks` :pr:`1`

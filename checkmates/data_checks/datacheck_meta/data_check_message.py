@@ -1,5 +1,5 @@
 """Messages returned by a DataCheck, tagged by name."""
-from checkers.data_checks.datacheck_meta.data_check_message_type import (
+from checkmates.data_checks.datacheck_meta.data_check_message_type import (
     DataCheckMessageType,
 )
 

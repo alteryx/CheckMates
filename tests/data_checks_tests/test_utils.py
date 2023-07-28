@@ -1,8 +1,8 @@
 import pytest
 
-from checkers.data_checks import DataCheckActionCode
-from checkers.data_checks.datacheck_meta.utils import handle_data_check_action_code
-from checkers.problem_types import ProblemTypes
+from checkmates.data_checks import DataCheckActionCode
+from checkmates.data_checks.datacheck_meta.utils import handle_data_check_action_code
+from checkmates.problem_types import ProblemTypes
 
 
 def test_handle_action_code_errors():

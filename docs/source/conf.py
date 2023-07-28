@@ -20,7 +20,7 @@ from pathlib import Path
 from sphinx.domains.python import PythonDomain
 from sphinx.ext.autodoc import Documenter, MethodDocumenter
 
-import checkers
+import checkmates
 
 path = os.path.join("..", "..")
 sys.path.insert(0, os.path.abspath(path))
@@ -28,14 +28,14 @@ sys.path.insert(0, os.path.abspath(path))
 
 # -- Project information -----------------------------------------------------
 
-project = "Checkers"
+project = "CheckMates"
 copyright = "2023, Alteryx, Inc."
 author = "Alteryx, Inc."
 
 # The short X.Y version
-version = checkers.__version__
+version = checkmates.__version__
 # The full version, including alpha/beta/rc tags
-release = checkers.__version__
+release = checkmates.__version__
 
 
 # -- General configuration ---------------------------------------------------
@@ -114,7 +114,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/alteryx/Checkers",
+            "url": "https://github.com/alteryx/CheckMates",
             "icon": "fab fa-github-square",
             "type": "fontawesome",
         },
@@ -132,7 +132,7 @@ html_theme_options = {
         },
         {
             "name": "StackOverflow",
-            "url": "https://stackoverflow.com/questions/tagged/checkers",
+            "url": "https://stackoverflow.com/questions/tagged/checkmates",
             "icon": "fab fa-stack-overflow",
             "type": "fontawesome",
         },
@@ -184,7 +184,7 @@ mathjax2_config = {
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "Checkersdoc"
+htmlhelp_basename = "CheckMatesdoc"
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -208,7 +208,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, "Checkers.tex", "Checkers Documentation", author, "manual"),
+    (master_doc, "CheckMates.tex", "CheckMates Documentation", author, "manual"),
 ]
 
 
@@ -216,7 +216,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "checkers", "Checkers Documentation", [author], 1)]
+man_pages = [(master_doc, "checkmates", "CheckMates Documentation", [author], 1)]
 
 
 # -- Options for Texinfo output ----------------------------------------------
@@ -227,10 +227,10 @@ man_pages = [(master_doc, "checkers", "Checkers Documentation", [author], 1)]
 texinfo_documents = [
     (
         master_doc,
-        "Checkers",
-        "Checkers Documentation",
+        "CheckMates",
+        "CheckMates Documentation",
         author,
-        "Checkers",
+        "CheckMates",
         "One line description of project.",
         "Miscellaneous",
     ),
@@ -256,10 +256,10 @@ epub_exclude_files = ["search.html"]
 
 # -- Extension configuration -------------------------------------------------
 
-# If checkers is open-sourced: replace github specific style.css
+# If checkmates is open-sourced: replace github specific style.css
 extlinks = {
-    "issue": ("https://github.com/alteryx/checkers/issues/%s", "#"),
-    "pr": ("https://github.com/alteryx/checkers/pull/%s", "#"),
+    "issue": ("https://github.com/alteryx/checkmates/issues/%s", "#"),
+    "pr": ("https://github.com/alteryx/checkmates/pull/%s", "#"),
     "user": ("https://github.com/%s", "@"),
 }
 
@@ -282,7 +282,7 @@ class AccessorLevelDocumenter(Documenter):
     """
 
     def resolve_name(self, modname, parents, path, base):
-        modname = "checkers"
+        modname = "checkmates"
         mod_cls = path.rstrip(".")
         mod_cls = mod_cls.split(".")
         return modname, mod_cls + [base]
