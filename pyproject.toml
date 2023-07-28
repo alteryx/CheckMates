@@ -4,7 +4,10 @@ name = "CheckMates"
 version = "0.1.0"
 description = "CheckMates is an AutoML library which catches and warns of problems with your data and problem setup before modeling."
 authors = [
-    {name = "Nabil Fayak", email = "nabil.fayak@alteryx.com"},
+    {name="Alteryx, Inc.", email="open_source_support@alteryx.com"}
+]
+maintainers = [
+    {name="Alteryx, Inc.", email="open_source_support@alteryx.com"}
 ]
 dependencies = [
     "numpy<=1.23.5,>=1.21.0",
