@@ -2,13 +2,15 @@ Release Notes
 -------------
 **Future Releases**
     * Enhancements
-        * *First PyPi Release* :pr:`8`
     * Fixes
     * Changes
     * Documentation Changes
     * Testing Changes
 
-**v0.1.0 July 27, 2023**
+**v0.1.0 July 28, 2023**
+* Enhancements
+    * updated pyproject to v0.1.0 for first release and added project urls :pr:`8`
+    * added pdm.lock and .python-version to .gitignore :pr:`8`
 * Fixes
     * Cleanup files and add release workflow :pr:`6`
 
