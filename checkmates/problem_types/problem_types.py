@@ -1,7 +1,7 @@
 """Enum defining the supported types of machine learning problems."""
 from enum import Enum
 
-from checkers.utils import classproperty
+from checkmates.utils import classproperty
 
 
 class ProblemTypes(Enum):

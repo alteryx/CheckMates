@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-- As a [user/developer], I wish I could use Checkers to ...
+- As a [user/developer], I wish I could use CheckMates to ...
 
 #### Code Example
 

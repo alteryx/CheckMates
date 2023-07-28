@@ -1,10 +1,13 @@
 
 [project]
-name = "Checkers"
+name = "CheckMates"
 version = "0.1.0"
-description = "Checkers is an AutoML library which catches and warns of problems with your data and problem setup before modeling."
+description = "CheckMates is an AutoML library which catches and warns of problems with your data and problem setup before modeling."
 authors = [
-    {name = "Nabil Fayak", email = "nabil.fayak@alteryx.com"},
+    {name="Alteryx, Inc.", email="open_source_support@alteryx.com"}
+]
+maintainers = [
+    {name="Alteryx, Inc.", email="open_source_support@alteryx.com"}
 ]
 dependencies = [
     "numpy<=1.23.5,>=1.21.0",
@@ -18,8 +21,8 @@ readme = "README.md"
 license = {text = "BSD-3-Clause"}
 
 [project.urls]
-"Source Code"= "https://github.com/alteryx/Checkers/"
-"Issue Tracker" = "https://github.com/alteryx/Checkers/issues"
+"Source Code"= "https://github.com/alteryx/CheckMates/"
+"Issue Tracker" = "https://github.com/alteryx/CheckMates/issues"
 
 [project.optional-dependencies]
 docs = [
@@ -88,13 +91,13 @@ ignore = ["E501", "D107", "D401"]
 "docs/**" = ["D"]
 
 [tool.ruff.isort]
-known-first-party = ["checkers"]
+known-first-party = ["checkmates"]
 
 [tool.ruff.pydocstyle]
 convention = "google"
 
 [tool.coverage.run]
-source = ["checkers"]
+source = ["checkmates"]
 
 [tool.coverage.report]
 exclude_lines =[

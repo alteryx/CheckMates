@@ -1,6 +1,6 @@
 .venv/
 **/__pycache__/
 .DS_Store
-Checkers.egg-info/
+Checkmates.egg-info/
 .python-version
 pdm.lock
