@@ -3,16 +3,16 @@
 ## 0. Pre-Release Checklist
 Before starting the release process, verify the following:
 * All work required for this release has been completed and the team is ready to release.
-* [All Github Actions tests are green on main](#).
+* [All Github Actions tests are green on main](https://github.com/alteryx/CheckMates/actions?query=branch%3Amain).
 * The [ReadtheDocs build](#) for "latest" is marked as passed. To avoid mysterious errors, best practice is to empty your browser cache when reading new versions of the docs!
-* The [public documentation for the "latest" branch](#) looks correct, and the [release notes](#) includes the last change which was made on main.
+* The [public documentation for the "latest" branch](#) looks correct, and the [release notes](https://github.com/alteryx/CheckMates/blob/quickstart-installation_update/docs/source/release_notes.rst) includes the last change which was made on main.
 * Get agreement on the version number to use for the release.
 
 #### Version Numbering
 
 CheckMates uses [semantic versioning](https://semver.org/). Every release has a major, minor and patch version number, and are displayed like so: `<majorVersion>.<minorVersion>.<patchVersion>`.
 
-If you'd like to create a development release, which won't be deployed to pypi and conda and marked as a generally-available production release, please add a "dev" prefix to the patch version, i.e. `X.X.devX`. Note this claims the patch number--if the previous release was `0.12.0`, a subsequent dev release would be `0.12.dev1`, and the following release would be `0.12.2`, *not* `0.12.1`. Development releases deploy to [test.pypi.org](#) instead of to [pypi.org](#).
+If you'd like to create a development release, which won't be deployed to pypi and conda and marked as a generally-available production release, please add a "dev" prefix to the patch version, i.e. `X.X.devX`. Note this claims the patch number--if the previous release was `0.12.0`, a subsequent dev release would be `0.12.dev1`, and the following release would be `0.12.2`, *not* `0.12.1`. Development releases deploy to [test.pypi.org](https://test.pypi.org/project/checkmates/) instead of to [pypi.org](https://pypi.org/project/CheckMates/).
 
 ## 1. Freeze `main` and run perf tests
 After confirming the release is ready to go in step 0, we'll freeze the `main` branch and kick off the release performance tests.

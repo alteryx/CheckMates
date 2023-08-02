@@ -36,7 +36,7 @@ Read more about CheckMates on our [documentation page](#):
 
 The CheckMates community is happy to provide support to users of CheckMates. Project support can be found in four places depending on the type of question:
 1. For usage questions, use [Stack Overflow](#) with the `CheckMates` tag.
-2. For bugs, issues, or feature requests start a [Github issue](#).
+2. For bugs, issues, or feature requests start a [Github issue](https://github.com/alteryx/CheckMates/issues).
 3. For discussion regarding development on the core library, use [Slack](#).
 4. For everything else, the core developers can be reached by email at open_source_support@alteryx.com
 
