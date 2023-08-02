@@ -7,17 +7,26 @@ CheckMates is an Alteryx Open Source library which catches and warns of problems
 python -m pip install checkmates
 ```
 ## Start
-<!-- #### Load and split example data
+#### Load and validate example data
 ```python
 from checkmates import (
-    DataCheckActionCode,
-    DataCheckActionOption,
-    DataCheckMessageCode,
-    DataCheckWarning,
-    IDColumnsDataCheck,
+    IDColumnsDataCheck
 )
+import pandas as pd
+
 id_data_check_name = IDColumnsDataCheck.name
-``` -->
+X_dict = {
+        "col_1": [1, 1, 2, 3],
+        "col_2": [2, 3, 4, 5],
+        "col_3_id": [0, 1, 2, 3],
+        "Id": [3, 1, 2, 0],
+        "col_5": [0, 0, 1, 2],
+        "col_6": [0.1, 0.2, 0.3, 0.4],
+    }
+X = pd.DataFrame.from_dict(X_dict)
+id_cols_check = IDColumnsDataCheck(id_threshold=0.95)
+print(id_cols_check.validate(X))
+```
 
 #### Run AutoML
 ```python
