@@ -28,13 +28,6 @@ id_cols_check = IDColumnsDataCheck(id_threshold=0.95)
 print(id_cols_check.validate(X))
 ```
 
-#### Run AutoML
-```python
-from evalml.automl import AutoMLSearch
-automl = AutoMLSearch(X_train=X_train, y_train=y_train, problem_type='binary')
-automl.search()
-```
-
 ## Next Steps
 
 Read more about CheckMates on our [documentation page](#):
