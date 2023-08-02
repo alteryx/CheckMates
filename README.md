@@ -3,8 +3,28 @@
 CheckMates is an Alteryx Open Source library which catches and warns of problems with your data and problem setup before modeling.
 
 ## Installation
-
+```bash
+python -m pip install checkmates
+```
 ## Start
+<!-- #### Load and split example data
+```python
+from checkmates import (
+    DataCheckActionCode,
+    DataCheckActionOption,
+    DataCheckMessageCode,
+    DataCheckWarning,
+    IDColumnsDataCheck,
+)
+id_data_check_name = IDColumnsDataCheck.name
+``` -->
+
+#### Run AutoML
+```python
+from evalml.automl import AutoMLSearch
+automl = AutoMLSearch(X_train=X_train, y_train=y_train, problem_type='binary')
+automl.search()
+```
 
 ## Next Steps
 
