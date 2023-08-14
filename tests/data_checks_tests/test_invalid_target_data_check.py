@@ -3,7 +3,6 @@ import pandas as pd
 import pytest
 import woodwork as ww
 
-from checkmates.objectives.utils import get_default_primary_search_objective
 from checkmates.data_checks import (
     DataCheckActionCode,
     DataCheckActionOption,
@@ -19,7 +18,13 @@ from checkmates.objectives import (
     MeanSquaredLogError,
     RootMeanSquaredLogError,
 )
-from checkmates.problem_types import ProblemTypes, is_binary, is_multiclass, is_regression
+from checkmates.objectives.utils import get_default_primary_search_objective
+from checkmates.problem_types import (
+    ProblemTypes,
+    is_binary,
+    is_multiclass,
+    is_regression,
+)
 from checkmates.utils.woodwork_utils import numeric_and_boolean_ww
 
 invalid_targets_data_check_name = InvalidTargetDataCheck.name

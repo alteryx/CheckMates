@@ -2,8 +2,9 @@
 from checkmates import objectives
 from checkmates.exceptions import ObjectiveCreationError, ObjectiveNotFoundError
 from checkmates.objectives.objective_base import ObjectiveBase
-from checkmates.utils.gen_utils import _get_subclasses
 from checkmates.problem_types import handle_problem_types
+from checkmates.utils.gen_utils import _get_subclasses
+
 
 def get_non_core_objectives():
     """Get non-core objective classes.
@@ -19,6 +20,7 @@ def get_non_core_objectives():
         objectives.RootMeanSquaredLogError,
     ]
 
+
 def _all_objectives_dict():
     all_objectives = _get_subclasses(ObjectiveBase)
     objectives_dict = {}
@@ -27,6 +29,7 @@ def _all_objectives_dict():
             continue
         objectives_dict[objective.name.lower()] = objective
     return objectives_dict
+
 
 def get_objective(objective, return_instance=False, **kwargs):
     """Returns the Objective class corresponding to a given objective name.
@@ -76,6 +79,7 @@ def get_objective(objective, return_instance=False, **kwargs):
 
     return objective_class
 
+
 def get_default_primary_search_objective(problem_type):
     """Get the default primary search objective for a problem type.
 
@@ -95,6 +99,7 @@ def get_default_primary_search_objective(problem_type):
         "time series multiclass": "Log Loss Multiclass",
     }[problem_type.value]
     return get_objective(objective_name, return_instance=True)
+
 
 def get_core_objectives(problem_type):
     """Returns all core objective instances associated with the given problem type.

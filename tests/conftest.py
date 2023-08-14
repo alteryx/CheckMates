@@ -1,8 +1,9 @@
 import pandas as pd
 import pytest
 import woodwork as ww
-from woodwork import logical_types as ww_logical_types
 from sklearn import datasets
+from woodwork import logical_types as ww_logical_types
+
 from checkmates.objectives.utils import get_core_objectives
 from checkmates.problem_types import ProblemTypes
 
@@ -117,6 +118,7 @@ def X_y_binary():
     y = ww.init_series(pd.Series(y), logical_type="integer")
     return X, y
 
+
 @pytest.fixture
 def X_y_regression():
     X, y = datasets.make_regression(
@@ -130,9 +132,11 @@ def X_y_regression():
     y = ww.init_series(pd.Series(y), logical_type="double")
     return X, y
 
+
 @pytest.fixture
 def time_series_core_objectives():
     return get_core_objectives(ProblemTypes.TIME_SERIES_REGRESSION)
+
 
 @pytest.fixture
 def make_data_type():

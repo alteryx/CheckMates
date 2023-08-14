@@ -1,3 +1,5 @@
+"""General Directory for CheckMates Objectives."""
+
 from checkmates.objectives.objective_base import ObjectiveBase
 from checkmates.objectives.regression_objective import RegressionObjective
 

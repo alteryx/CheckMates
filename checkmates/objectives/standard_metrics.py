@@ -6,6 +6,7 @@ from sklearn import metrics
 from checkmates.objectives.regression_objective import RegressionObjective
 from checkmates.utils import classproperty
 
+
 class RootMeanSquaredLogError(RegressionObjective):
     """Root mean squared log error for regression.
 
