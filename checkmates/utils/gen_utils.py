@@ -56,6 +56,7 @@ class classproperty:
         """Get property value."""
         return self.func(klass)
 
+
 def contains_all_ts_parameters(problem_configuration):
     """Validates that the problem configuration contains all required keys.
 
@@ -84,6 +85,7 @@ _validation_result = namedtuple(
     "TSParameterValidationResult",
     ("is_valid", "msg", "smallest_split_size", "max_window_size", "n_obs", "n_splits"),
 )
+
 
 def are_ts_parameters_valid_for_split(
     gap,

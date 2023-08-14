@@ -24,18 +24,31 @@ from checkmates.data_checks.datacheck_meta.data_check_message_type import (
 )
 from checkmates.data_checks.checks.id_columns_data_check import IDColumnsDataCheck
 from checkmates.data_checks.checks.null_data_check import NullDataCheck
-from checkmates.data_checks.checks.class_imbalance_data_check import ClassImbalanceDataCheck
+from checkmates.data_checks.checks.class_imbalance_data_check import (
+    ClassImbalanceDataCheck,
+)
 from checkmates.data_checks.checks.no_variance_data_check import NoVarianceDataCheck
 from checkmates.data_checks.checks.outliers_data_check import OutliersDataCheck
 from checkmates.data_checks.checks.uniqueness_data_check import UniquenessDataCheck
-from checkmates.data_checks.checks.ts_splitting_data_check import TimeSeriesSplittingDataCheck
-from checkmates.data_checks.checks.ts_parameters_data_check import TimeSeriesParametersDataCheck
-from checkmates.data_checks.checks.target_leakage_data_check import TargetLeakageDataCheck
-from checkmates.data_checks.checks.target_distribution_data_check import TargetDistributionDataCheck
+from checkmates.data_checks.checks.ts_splitting_data_check import (
+    TimeSeriesSplittingDataCheck,
+)
+from checkmates.data_checks.checks.ts_parameters_data_check import (
+    TimeSeriesParametersDataCheck,
+)
+from checkmates.data_checks.checks.target_leakage_data_check import (
+    TargetLeakageDataCheck,
+)
+from checkmates.data_checks.checks.target_distribution_data_check import (
+    TargetDistributionDataCheck,
+)
 from checkmates.data_checks.checks.sparsity_data_check import SparsityDataCheck
-from checkmates.data_checks.checks.datetime_format_data_check import DateTimeFormatDataCheck
-from checkmates.data_checks.checks.multicollinearity_data_check import MulticollinearityDataCheck
-
+from checkmates.data_checks.checks.datetime_format_data_check import (
+    DateTimeFormatDataCheck,
+)
+from checkmates.data_checks.checks.multicollinearity_data_check import (
+    MulticollinearityDataCheck,
+)
 
 
 from checkmates.data_checks.datacheck_meta.utils import handle_data_check_action_code

@@ -1,8 +1,8 @@
 import pandas as pd
 import pytest
 import woodwork as ww
-from woodwork import logical_types as ww_logical_types
 from sklearn import datasets
+from woodwork import logical_types as ww_logical_types
 
 
 def pytest_configure(config):
@@ -115,6 +115,7 @@ def X_y_binary():
     y = ww.init_series(pd.Series(y), logical_type="integer")
     return X, y
 
+
 @pytest.fixture
 def X_y_regression():
     X, y = datasets.make_regression(
@@ -127,6 +128,7 @@ def X_y_regression():
     X.ww.init(logical_types={col: "double" for col in X.columns})
     y = ww.init_series(pd.Series(y), logical_type="double")
     return X, y
+
 
 @pytest.fixture
 def make_data_type():
