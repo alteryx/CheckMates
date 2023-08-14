@@ -1,6 +1,7 @@
 import pandas as pd
 import pytest
 import woodwork as ww
+from woodwork import logical_types as ww_logical_types
 from sklearn import datasets
 
 
@@ -113,3 +114,56 @@ def X_y_binary():
     X.ww.init(logical_types={col: "double" for col in X.columns})
     y = ww.init_series(pd.Series(y), logical_type="integer")
     return X, y
+
+@pytest.fixture
+def X_y_regression():
+    X, y = datasets.make_regression(
+        n_samples=100,
+        n_features=20,
+        n_informative=3,
+        random_state=0,
+    )
+    X = pd.DataFrame(X)
+    X.ww.init(logical_types={col: "double" for col in X.columns})
+    y = ww.init_series(pd.Series(y), logical_type="double")
+    return X, y
+
+@pytest.fixture
+def make_data_type():
+    """Helper function to convert numpy or pandas input to the appropriate type for tests."""
+
+    def _make_data_type(data_type, data, nullable=False):
+        if data_type == "li":
+            if isinstance(data, pd.DataFrame):
+                data = data.to_numpy()
+            data = data.tolist()
+            return data
+        if data_type != "np":
+            if len(data.shape) == 1:
+                data = pd.Series(data)
+            else:
+                data = pd.DataFrame(data)
+        if data_type == "ww":
+            if len(data.shape) == 1:
+                data = ww.init_series(data)
+                if nullable and isinstance(
+                    data.ww.logical_type,
+                    ww_logical_types.Integer,
+                ):
+                    data = ww.init_series(
+                        data,
+                        logical_type=ww_logical_types.IntegerNullable,
+                    )
+                elif nullable and isinstance(
+                    data.ww.logical_type,
+                    ww_logical_types.Boolean,
+                ):
+                    data = ww.init_series(
+                        data,
+                        logical_type=ww_logical_types.BooleanNullable,
+                    )
+            else:
+                data.ww.init()
+        return data
+
+    return _make_data_type

@@ -1,5 +1,6 @@
 """General utility methods."""
 import logging
+from collections import namedtuple
 
 logger = logging.getLogger(__name__)
 
@@ -54,3 +55,69 @@ class classproperty:
     def __get__(self, _, klass):
         """Get property value."""
         return self.func(klass)
+
+def contains_all_ts_parameters(problem_configuration):
+    """Validates that the problem configuration contains all required keys.
+
+    Args:
+        problem_configuration (dict): Problem configuration.
+
+    Returns:
+        bool, str: True if the configuration contains all parameters. If False, msg is a non-empty
+            string with error message.
+    """
+    required_parameters = {"time_index", "gap", "max_delay", "forecast_horizon"}
+    msg = ""
+    if (
+        not problem_configuration
+        or not all(p in problem_configuration for p in required_parameters)
+        or problem_configuration["time_index"] is None
+    ):
+        msg = (
+            "problem_configuration must be a dict containing values for at least the time_index, gap, max_delay, "
+            f"and forecast_horizon parameters, and time_index cannot be None. Received {problem_configuration}."
+        )
+    return not (msg), msg
+
+
+_validation_result = namedtuple(
+    "TSParameterValidationResult",
+    ("is_valid", "msg", "smallest_split_size", "max_window_size", "n_obs", "n_splits"),
+)
+
+def are_ts_parameters_valid_for_split(
+    gap,
+    max_delay,
+    forecast_horizon,
+    n_obs,
+    n_splits,
+):
+    """Validates the time series parameters in problem_configuration are compatible with split sizes.
+
+    Args:
+        gap (int): gap value.
+        max_delay (int): max_delay value.
+        forecast_horizon (int): forecast_horizon value.
+        n_obs (int): Number of observations in the dataset.
+        n_splits (int): Number of cross validation splits.
+
+    Returns:
+        TsParameterValidationResult - named tuple with four fields
+            is_valid (bool): True if parameters are valid.
+            msg (str): Contains error message to display. Empty if is_valid.
+            smallest_split_size (int): Smallest split size given n_obs and n_splits.
+            max_window_size (int): Max window size given gap, max_delay, forecast_horizon.
+    """
+    eval_size = forecast_horizon * n_splits
+    train_size = n_obs - eval_size
+    window_size = gap + max_delay + forecast_horizon
+    msg = ""
+    if train_size <= window_size:
+        msg = (
+            f"Since the data has {n_obs} observations, n_splits={n_splits}, and a forecast horizon of {forecast_horizon}, "
+            f"the smallest split would have {train_size} observations. "
+            f"Since {gap + max_delay + forecast_horizon} (gap + max_delay + forecast_horizon) >= {train_size}, "
+            "then at least one of the splits would be empty by the time it reaches the pipeline. "
+            "Please use a smaller number of splits, reduce one or more these parameters, or collect more data."
+        )
+    return _validation_result(not msg, msg, train_size, window_size, n_obs, n_splits)
