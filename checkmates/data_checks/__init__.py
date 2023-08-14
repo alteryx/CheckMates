@@ -35,6 +35,7 @@ from checkmates.data_checks.checks.target_distribution_data_check import TargetD
 from checkmates.data_checks.checks.sparsity_data_check import SparsityDataCheck
 from checkmates.data_checks.checks.datetime_format_data_check import DateTimeFormatDataCheck
 from checkmates.data_checks.checks.multicollinearity_data_check import MulticollinearityDataCheck
+from checkmates.data_checks.checks.invalid_target_data_check import InvalidTargetDataCheck
 
 
 
