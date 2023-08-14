@@ -2,6 +2,7 @@ Release Notes
 -------------
 **Future Releases**
     * Enhancements
+        * Added all datachecks except `invalid_target_data_check`` along with tests and utils, migrated over from `EvalML` :pr:`15`
     * Fixes
     * Changes
     * Documentation Changes
