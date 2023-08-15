@@ -4,3 +4,4 @@
 Checkmates.egg-info/
 .python-version
 pdm.lock
+.pdm-python
