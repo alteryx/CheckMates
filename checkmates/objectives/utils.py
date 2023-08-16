@@ -1,4 +1,4 @@
-"""Utility methods for EvalML objectives."""
+"""Utility methods for CheckMates objectives."""
 from checkmates import objectives
 from checkmates.exceptions import ObjectiveCreationError, ObjectiveNotFoundError
 from checkmates.objectives.objective_base import ObjectiveBase
@@ -20,12 +20,20 @@ def get_non_core_objectives():
         objectives.RootMeanSquaredLogError,
     ]
 
+def get_all_objective_names():
+    """Get a list of the names of all objectives.
+
+    Returns:
+        list (str): Objective names
+    """
+    all_objectives_dict = _all_objectives_dict()
+    return list(all_objectives_dict.keys())
 
 def _all_objectives_dict():
     all_objectives = _get_subclasses(ObjectiveBase)
     objectives_dict = {}
     for objective in all_objectives:
-        if "evalml.objectives" not in objective.__module__:
+        if "checkmates.objectives" not in objective.__module__:
             continue
         objectives_dict[objective.name.lower()] = objective
     return objectives_dict
@@ -63,7 +71,7 @@ def get_objective(objective, return_instance=False, **kwargs):
     if objective.lower() not in all_objectives_dict:
         raise ObjectiveNotFoundError(
             f"{objective} is not a valid Objective! "
-            "Use evalml.objectives.get_all_objective_names() "
+            "Use checkmates.objectives.get_all_objective_names() "
             "to get a list of all valid objective names. ",
         )
 
