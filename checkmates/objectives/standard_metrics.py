@@ -3,10 +3,14 @@ import numpy as np
 import pandas as pd
 from sklearn import metrics
 
+from checkmates.objectives.binary_classification_objective import (
+    BinaryClassificationObjective,
+)
+from checkmates.objectives.multiclass_classification_objective import (
+    MulticlassClassificationObjective,
+)
 from checkmates.objectives.regression_objective import RegressionObjective
 from checkmates.utils import classproperty
-from checkmates.objectives.binary_classification_objective import BinaryClassificationObjective
-from checkmates.objectives.multiclass_classification_objective import MulticlassClassificationObjective
 
 
 class LogLossBinary(BinaryClassificationObjective):
@@ -35,6 +39,7 @@ class LogLossBinary(BinaryClassificationObjective):
     ):
         """Objective function for log loss for binary classification."""
         return metrics.log_loss(y_true, y_predicted, sample_weight=sample_weight)
+
 
 class LogLossMulticlass(MulticlassClassificationObjective):
     """Log Loss for multiclass classification.
@@ -68,6 +73,7 @@ class LogLossMulticlass(MulticlassClassificationObjective):
         """Objective function for log loss for multiclass classification."""
         return metrics.log_loss(y_true, y_predicted, sample_weight=sample_weight)
 
+
 class R2(RegressionObjective):
     """Coefficient of determination for regression.
 
@@ -94,6 +100,7 @@ class R2(RegressionObjective):
     ):
         """Objective function for coefficient of determination for regression."""
         return metrics.r2_score(y_true, y_predicted, sample_weight=sample_weight)
+
 
 class MedianAE(RegressionObjective):
     """Median absolute error for regression.
@@ -125,7 +132,6 @@ class MedianAE(RegressionObjective):
             y_predicted,
             sample_weight=sample_weight,
         )
-
 
 
 class RootMeanSquaredLogError(RegressionObjective):

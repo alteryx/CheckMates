@@ -20,6 +20,7 @@ def get_non_core_objectives():
         objectives.RootMeanSquaredLogError,
     ]
 
+
 def get_all_objective_names():
     """Get a list of the names of all objectives.
 
@@ -28,6 +29,7 @@ def get_all_objective_names():
     """
     all_objectives_dict = _all_objectives_dict()
     return list(all_objectives_dict.keys())
+
 
 def _all_objectives_dict():
     all_objectives = _get_subclasses(ObjectiveBase)

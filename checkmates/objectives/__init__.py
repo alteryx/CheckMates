@@ -12,5 +12,9 @@ from checkmates.objectives.utils import get_core_objectives
 from checkmates.objectives.standard_metrics import RootMeanSquaredLogError
 from checkmates.objectives.standard_metrics import MeanSquaredLogError
 
-from checkmates.objectives.binary_classification_objective import BinaryClassificationObjective
-from checkmates.objectives.multiclass_classification_objective import MulticlassClassificationObjective
+from checkmates.objectives.binary_classification_objective import (
+    BinaryClassificationObjective,
+)
+from checkmates.objectives.multiclass_classification_objective import (
+    MulticlassClassificationObjective,
+)
