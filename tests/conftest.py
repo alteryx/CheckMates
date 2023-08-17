@@ -4,6 +4,9 @@ import woodwork as ww
 from sklearn import datasets
 from woodwork import logical_types as ww_logical_types
 
+from checkmates.objectives.utils import get_core_objectives
+from checkmates.problem_types import ProblemTypes
+
 
 def pytest_configure(config):
     config.addinivalue_line(
@@ -128,6 +131,11 @@ def X_y_regression():
     X.ww.init(logical_types={col: "double" for col in X.columns})
     y = ww.init_series(pd.Series(y), logical_type="double")
     return X, y
+
+
+@pytest.fixture
+def time_series_core_objectives():
+    return get_core_objectives(ProblemTypes.TIME_SERIES_REGRESSION)
 
 
 @pytest.fixture

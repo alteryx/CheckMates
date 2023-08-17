@@ -8,6 +8,16 @@ class MissingComponentError(Exception):
     pass
 
 
+class ObjectiveNotFoundError(Exception):
+    """Exception to raise when specified objective does not exist."""
+
+    pass
+
+
+class ObjectiveCreationError(Exception):
+    """Exception when get_objective tries to instantiate an objective and required args are not provided."""
+
+
 class DataCheckInitError(Exception):
     """Exception raised when a data check can't initialize with the parameters given."""
 

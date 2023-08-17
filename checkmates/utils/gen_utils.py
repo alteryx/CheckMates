@@ -5,6 +5,30 @@ from collections import namedtuple
 logger = logging.getLogger(__name__)
 
 
+def _get_subclasses(base_class):
+    """Gets all of the leaf nodes in the hiearchy tree for a given base class.
+
+    Args:
+        base_class (abc.ABCMeta): Class to find all of the children for.
+
+    Returns:
+        subclasses (list): List of all children that are not base classes.
+    """
+    classes_to_check = base_class.__subclasses__()
+    subclasses = []
+
+    while classes_to_check:
+        subclass = classes_to_check.pop()
+        children = subclass.__subclasses__()
+
+        if children:
+            classes_to_check.extend(children)
+        else:
+            subclasses.append(subclass)
+
+    return subclasses
+
+
 class classproperty:
     """Allows function to be accessed as a class level property.
 
