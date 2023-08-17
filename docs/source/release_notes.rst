@@ -9,7 +9,7 @@ Release Notes
 
 **v0.2.0 Aug 17, 2023**
     * Enhancements
-        * Added all datachecks except `invalid_target_data_check`` along with tests and utils, migrated over from `EvalML` :pr:`15`
+        * Added all datachecks except `invalid_target_data_check` along with tests and utils, migrated over from `EvalML` :pr:`15`
         * Added ``invalid_target_data_check`` along with all tests, utils, and objectives, migrated from ``EvalML`` :pr:`17`
     * Documentation Changes
         * Updated readme.md, contrubuting.md, and releases.md to reflect CheckMates package installation, quickstart, and useful links :pr:`13`
