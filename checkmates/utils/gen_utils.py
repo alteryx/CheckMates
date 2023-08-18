@@ -1,8 +1,9 @@
 """General utility methods."""
 import logging
 from collections import namedtuple
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 
 logger = logging.getLogger(__name__)
 
@@ -149,6 +150,7 @@ def are_ts_parameters_valid_for_split(
             "Please use a smaller number of splits, reduce one or more these parameters, or collect more data."
         )
     return _validation_result(not msg, msg, train_size, window_size, n_obs, n_splits)
+
 
 def safe_repr(value):
     """Convert the given value into a string that can safely be used for repr.

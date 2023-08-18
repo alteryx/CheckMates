@@ -1,16 +1,15 @@
 """A component that may or may not need fitting that transforms data. These components are used before an estimator."""
 from abc import abstractmethod
 
-from checkmates.exceptions import MethodPropertyNotFoundError
-from checkmates.pipelines import ComponentBase
-from checkmates.utils import infer_feature_types
 import pandas as pd
 import woodwork
 from sklearn.impute import SimpleImputer as SkImputer
 
-from checkmates.pipelines.transformers import Transformer
+from checkmates.exceptions import MethodPropertyNotFoundError
+from checkmates.pipelines import ComponentBase
 from checkmates.utils import infer_feature_types
 from checkmates.utils.nullable_type_utils import _get_new_logical_types_for_imputed_data
+
 
 class Transformer(ComponentBase):
     """A component that may or may not need fitting that transforms data. These components are used before an estimator.
@@ -83,7 +82,9 @@ class Transformer(ComponentBase):
     def _get_feature_provenance(self):
         return {}
 
+
 """Component that imputes missing data according to a specified imputation strategy."""
+
 
 class SimpleImputer(Transformer):
     """Imputes missing data according to a specified imputation strategy.  Natural language columns are ignored.

@@ -1,3 +1,4 @@
+"""Nullable Type Utils for CheckMates."""
 import woodwork as ww
 from woodwork.logical_types import AgeNullable, BooleanNullable, IntegerNullable
 
@@ -9,8 +10,7 @@ DOWNCAST_TYPE_DICT = {
 
 
 def _downcast_nullable_X(X, handle_boolean_nullable=True, handle_integer_nullable=True):
-    """Removes Pandas nullable integer and nullable boolean dtypes from data by transforming
-        to other dtypes via Woodwork logical type transformations.
+    """Removes Pandas nullable integer and nullable boolean dtypes from data by transforming to other dtypes via Woodwork logical type transformations.
 
     Args:
         X (pd.DataFrame): Input data of shape [n_samples, n_features] whose nullable types will be changed.
@@ -44,8 +44,7 @@ def _downcast_nullable_X(X, handle_boolean_nullable=True, handle_integer_nullabl
 
 
 def _downcast_nullable_y(y, handle_boolean_nullable=True, handle_integer_nullable=True):
-    """Removes Pandas nullable integer and nullable boolean dtypes from data by transforming
-        to other dtypes via Woodwork logical type transformations.
+    """Removes Pandas nullable integer and nullable boolean dtypes from data by transforming to other dtypes via Woodwork logical type transformations.
 
     Args:
         y (pd.Series): Target data of shape [n_samples] whose nullable types will be changed.
@@ -93,6 +92,7 @@ def _get_incompatible_nullable_types(handle_boolean_nullable, handle_integer_nul
 
 def _determine_downcast_type(col):
     """Determines what logical type to downcast to based on whether nans were present or not.
+
         - BooleanNullable becomes Boolean if nans are not present and Categorical if they are
         - IntegerNullable becomes Integer if nans are not present and Double if they are.
         - AgeNullable becomes Age if nans are not present and AgeFractional if they are.
@@ -113,6 +113,7 @@ def _determine_downcast_type(col):
 
 def _determine_fractional_type(logical_type):
     """Determines what logical type to use for integer data that has fractional values imputed.
+
     - IntegerNullable becomes Double.
     - AgeNullable becomes AgeFractional.
     - All other logical types are returned unchanged.
@@ -133,6 +134,7 @@ def _determine_fractional_type(logical_type):
 
 def _determine_non_nullable_equivalent(logical_type):
     """Determines the non nullable equivalent logical type to use for nullable types. These types cannot support null values.
+
     - IntegerNullable becomes Integer.
     - AgeNullable becomes Age.
     - BooleanNullable becomes Boolean.
@@ -166,6 +168,7 @@ def _get_new_logical_types_for_imputed_data(
         dict[str, ww.LogicalType]: Updated logical types to use for imputed data.
     """
     # Some impute strategies will always maintain integer values, so we can use the original logical types
+
     if impute_strategy in {"most_frequent", "forwards_fill", "backwards_fill"}:
         return original_schema.logical_types
 

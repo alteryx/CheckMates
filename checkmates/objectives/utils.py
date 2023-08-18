@@ -1,14 +1,13 @@
 """Utility methods for CheckMates objectives."""
-import pandas as pd
 from typing import Optional
+
+import pandas as pd
 
 from checkmates import objectives
 from checkmates.exceptions import ObjectiveCreationError, ObjectiveNotFoundError
 from checkmates.objectives.objective_base import ObjectiveBase
-from checkmates.problem_types import handle_problem_types
+from checkmates.problem_types import ProblemTypes, handle_problem_types
 from checkmates.utils.gen_utils import _get_subclasses
-from checkmates.problem_types import ProblemTypes
-
 from checkmates.utils.logger import get_logger
 
 logger = get_logger(__file__)
@@ -97,11 +96,12 @@ def get_objective(objective, return_instance=False, **kwargs):
 
     return objective_class
 
+
 def get_problem_type(
     input_problem_type: Optional[str],
     target_data: pd.Series,
 ) -> ProblemTypes:
-    """helper function to determine if classification problem is binary or multiclass dependent on target variable values."""
+    """Helper function to determine if classification problem is binary or multiclass dependent on target variable values."""
     if not input_problem_type:
         raise ValueError("problem type is required")
     if input_problem_type.lower() == "classification":

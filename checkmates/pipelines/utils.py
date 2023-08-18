@@ -1,9 +1,9 @@
 """Utility methods for EvalML pipelines."""
-from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
 from typing import Union
+
 import numpy as np
 import pandas as pd
-
+from sklearn.model_selection import ShuffleSplit, StratifiedShuffleSplit
 
 from checkmates.data_checks import DataCheckActionCode
 from checkmates.pipelines.components import (  # noqa: F401
@@ -14,11 +14,9 @@ from checkmates.pipelines.components import (  # noqa: F401
     TimeSeriesImputer,
     TimeSeriesRegularizer,
 )
-from checkmates.utils import infer_feature_types
 from checkmates.pipelines.training_validation_split import TrainingValidationSplit
 from checkmates.problem_types import is_classification, is_regression, is_time_series
-
-
+from checkmates.utils import infer_feature_types
 
 
 def _make_component_list_from_actions(actions):
@@ -69,6 +67,7 @@ def _make_component_list_from_actions(actions):
         components.append(DropRowsTransformer(indices_to_drop=indices_to_drop))
 
     return components
+
 
 def split_data(
     X,
@@ -163,10 +162,11 @@ def split_data(
 
     return X_train, X_test, y_train, y_test
 
+
 def drop_infinity(
     data: Union[pd.DataFrame, pd.Series],
 ) -> Union[pd.DataFrame, pd.Series]:
-    """Removes infinity values"""
+    """Removes infinity values."""
     ww = data.ww._schema is not None
     replace = data.ww.replace if ww else data.replace
     return replace([np.inf, -np.inf], np.nan)
