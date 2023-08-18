@@ -13,6 +13,15 @@ class ObjectiveNotFoundError(Exception):
 
     pass
 
+class MethodPropertyNotFoundError(Exception):
+    """Exception to raise when a class is does not have an expected method or property."""
+
+    pass
+
+class ComponentNotYetFittedError(Exception):
+    """An exception to be raised when predict/predict_proba/transform is called on a component without fitting first."""
+
+    pass
 
 class ObjectiveCreationError(Exception):
     """Exception when get_objective tries to instantiate an objective and required args are not provided."""
