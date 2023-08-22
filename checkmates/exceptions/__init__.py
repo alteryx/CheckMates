@@ -5,4 +5,6 @@ from checkmates.exceptions.exceptions import (
     ValidationErrorCode,
     ObjectiveCreationError,
     ObjectiveNotFoundError,
+    MethodPropertyNotFoundError,
+    ComponentNotYetFittedError,
 )

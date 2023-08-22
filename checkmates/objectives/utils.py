@@ -1,9 +1,16 @@
 """Utility methods for CheckMates objectives."""
+from typing import Optional
+
+import pandas as pd
+
 from checkmates import objectives
 from checkmates.exceptions import ObjectiveCreationError, ObjectiveNotFoundError
 from checkmates.objectives.objective_base import ObjectiveBase
-from checkmates.problem_types import handle_problem_types
+from checkmates.problem_types import ProblemTypes, handle_problem_types
 from checkmates.utils.gen_utils import _get_subclasses
+from checkmates.utils.logger import get_logger
+
+logger = get_logger(__file__)
 
 
 def get_non_core_objectives():
@@ -88,6 +95,35 @@ def get_objective(objective, return_instance=False, **kwargs):
             )
 
     return objective_class
+
+
+def get_problem_type(
+    input_problem_type: Optional[str],
+    target_data: pd.Series,
+) -> ProblemTypes:
+    """Helper function to determine if classification problem is binary or multiclass dependent on target variable values."""
+    if not input_problem_type:
+        raise ValueError("problem type is required")
+    if input_problem_type.lower() == "classification":
+        values: pd.Series = target_data.value_counts()
+        if values.size == 2:
+            return ProblemTypes.BINARY
+        elif values.size > 2:
+            return ProblemTypes.MULTICLASS
+        else:
+            message: str = "The target field contains less than two unique values. It cannot be used for modeling."
+            logger.error(message, exc_info=True)
+            raise ValueError(message)
+
+    if input_problem_type.lower() == "regression":
+        return ProblemTypes.REGRESSION
+
+    if input_problem_type.lower() == "time series regression":
+        return ProblemTypes.TIME_SERIES_REGRESSION
+
+    message = f"Unexpected problem type provided in configuration: {input_problem_type}"
+    logger.error(message, exc_info=True)
+    raise ValueError(message)
 
 
 def get_default_primary_search_objective(problem_type):
