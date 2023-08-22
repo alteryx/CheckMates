@@ -7,7 +7,7 @@ Release Notes
     * Documentation Changes
     * Testing Changes
 
-**v0.2.0 Aug 17, 2023**
+**v0.2.0 Aug 22, 2023**
     * Enhancements
         * Added all datachecks except `invalid_target_data_check` along with tests and utils, migrated over from `EvalML` :pr:`15`
         * Added ``invalid_target_data_check`` along with all tests, utils, and objectives, migrated from ``EvalML`` :pr:`17`
