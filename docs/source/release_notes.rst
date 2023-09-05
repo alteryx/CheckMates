@@ -2,6 +2,7 @@ Release Notes
 -------------
 **Future Releases**
     * Enhancements
+        * Created ``distribution_data_check`` to screen for positive and negative skews as well as bimodal distributions :pr:`21`
     * Fixes
     * Changes
     * Documentation Changes

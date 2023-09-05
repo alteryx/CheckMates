@@ -1,7 +1,7 @@
 """Data check that checks if the target data contains certain distributions that may need to be transformed prior training to improve model performance."""
+import diptest
 import numpy as np
 import woodwork as ww
-import diptest
 
 from checkmates.data_checks import (
     DataCheck,
@@ -15,7 +15,7 @@ from checkmates.utils import infer_feature_types
 
 
 class DistributionDataCheck(DataCheck):
-    """Check if the target data contains certain distributions that may need to be transformed prior training to improve model performance. Uses the skew test and yeojohnson transformation"""
+    """Check if the target data contains certain distributions that may need to be transformed prior training to improve model performance. Uses the skew test and yeojohnson transformation."""
 
     def validate(self, X, y):
         """Check if the target data has a skewed or bimodal distribution.
@@ -113,9 +113,8 @@ class DistributionDataCheck(DataCheck):
             is_skew,
             distribution_type,
             skew_value,
-            coef
+            coef,
         ) = _detect_skew_distribution_helper(y)
-
 
         if is_skew:
             details = {

@@ -3,8 +3,8 @@ from abc import abstractmethod
 
 import pandas as pd
 import woodwork
-from sklearn.impute import SimpleImputer as SkImputer
 from scipy.stats import yeojohnson
+from sklearn.impute import SimpleImputer as SkImputer
 
 from checkmates.exceptions import MethodPropertyNotFoundError
 from checkmates.pipelines import ComponentBase
@@ -83,7 +83,10 @@ class Transformer(ComponentBase):
     def _get_feature_provenance(self):
         return {}
 
+
 """Component that normalizes skewed distributions using the Yeo-Johnson method"""
+
+
 class SimpleNormalizer(Transformer):
     """Normalizes skewed data according to the Yeo-Johnson method.
 
@@ -96,9 +99,7 @@ class SimpleNormalizer(Transformer):
 
     """
 
-    def __init__(
-        self
-    ):
+    def __init__(self):
         super().__init__(
             parameters=None,
         )
@@ -113,9 +114,8 @@ class SimpleNormalizer(Transformer):
         Returns:
             pd.DataFrame: Transformed X
         """
-
         # Transform the data
-        X_t = yeojohnson(X_t)
+        X_t = yeojohnson(X)
 
         # Reinit woodwork
         X_t.ww.init()
