@@ -88,16 +88,7 @@ class Transformer(ComponentBase):
 
 
 class SimpleNormalizer(Transformer):
-    """Normalizes skewed data according to the Yeo-Johnson method.
-
-    Args:
-        impute_strategy (string): Impute strategy to use. Valid values include "mean", "median", "most_frequent", "constant" for
-           numerical data, and "most_frequent", "constant" for object data types.
-        fill_value (string): When impute_strategy == "constant", fill_value is used to replace missing data.
-           Defaults to 0 when imputing numerical data and "missing_value" for strings or object data types.
-        random_seed (int): Seed for the random number generator. Defaults to 0.
-
-    """
+    """Normalizes skewed data according to the Yeo-Johnson method."""
 
     def __init__(self):
         super().__init__(
@@ -109,7 +100,7 @@ class SimpleNormalizer(Transformer):
 
         Args:
             X (pd.DataFrame): Data to transform.
-            y (pd.Series, optional): Ignored.
+            y (pd.Series, optional):
 
         Returns:
             pd.DataFrame: Transformed X

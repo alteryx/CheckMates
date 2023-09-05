@@ -58,8 +58,8 @@ class DataCheckMessageCode(Enum):
     TARGET_LOGNORMAL_DISTRIBUTION = "target_lognormal_distribution"
     """Message code for target data with a lognormal distribution."""
 
-    TARGET_SKEWED_DISTRIBUTION = "target_skewed_distribution"
-    """Message code for target data with a skewed distribution."""
+    SKEWED_DISTRIBUTION = "skewed_distribution"
+    """Message code for data with a skewed distribution."""
 
     HIGH_VARIANCE = "high_variance"
     """Message code for when high variance is detected for cross-validation."""

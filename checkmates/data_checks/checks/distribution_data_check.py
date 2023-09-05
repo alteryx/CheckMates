@@ -15,54 +15,52 @@ from checkmates.utils import infer_feature_types
 
 
 class DistributionDataCheck(DataCheck):
-    """Check if the target data contains certain distributions that may need to be transformed prior training to improve model performance. Uses the skew test and yeojohnson transformation."""
+    """Check if the overall data contains certain distributions that may need to be transformed prior training to improve model performance. Uses the skew test and yeojohnson transformation."""
 
     def validate(self, X, y):
-        """Check if the target data has a skewed or bimodal distribution.
+        """Check if the overall data has a skewed or bimodal distribution.
 
         Args:
-            X (pd.DataFrame, np.ndarray): Features. Ignored.
+            X (pd.DataFrame, np.ndarray): Overall data to check for skewed or bimodal distributions.
             y (pd.Series, np.ndarray): Target data to check for underlying distributions.
 
         Returns:
-            dict (DataCheckError): List with DataCheckErrors if certain distributions are found in the target data.
+            dict (DataCheckError): List with DataCheckErrors if certain distributions are found in the overall data.
 
         Examples:
             >>> import pandas as pd
 
-            Targets that exhibit a skewed distribution will raise a warning for the user to transform the target.
+            Features and target data that exhibit a skewed distribution will raise a warning for the user to transform the data.
 
-            >>> y = [0.946, 0.972, 1.154, 0.954, 0.969, 1.222, 1.038, 0.999, 0.973, 0.897]
-            >>> target_check = DistributionDataCheck()
-            >>> assert target_check.validate(None, y) == [
+            >>> X = [5, 7, 8, 9, 10, 11, 12, 15, 20]
+            >>> data_check = DistributionDataCheck()
+            >>> assert data_check.validate(X, y) == [
             ...     {
-            ...         "message": "Target may have a skewed distribution.",
+            ...         "message": "Data may have a skewed distribution.",
             ...         "data_check_name": "DistributionDataCheck",
             ...         "level": "warning",
-            ...         "code": "TARGET_SKEWED_DISTRIBUTION",
-            ...         "details": {"normalization_method": "shapiro", "statistic": 0.8, "p-value": 0.045, "columns": None, "rows": None},
+            ...         "code": "SKEWED_DISTRIBUTION",
+            ...         "details": {"distribution type": "positive skew", "Skew Value": 0.7939, "Bimodal Coefficient": 1.0,},
             ...         "action_options": [
             ...             {
             ...                 "code": "TRANSFORM_TARGET",
             ...                 "data_check_name": "DistributionDataCheck",
             ...                 "parameters": {},
             ...                 "metadata": {
-            ...                     "transformation_strategy": "yeojohnson",
-            ...                     "is_target": True,
-            ...                     "columns": None,
-            ...                     "rows": None
+                                    "is_skew": True,
+                                    "transformation_strategy": "yeojohnson",
             ...                 }
             ...             }
             ...         ]
             ...     }
             ... ]
             ...
-            >>> y = pd.Series([1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 5])
-            >>> assert target_check.validate(None, y) == []
+            >>> X = pd.Series([1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 5])
+            >>> assert target_check.validate(X, y) == []
             ...
             ...
-            >>> y = pd.Series(pd.date_range("1/1/21", periods=10))
-            >>> assert target_check.validate(None, y) == [
+            >>> X = pd.Series(pd.date_range("1/1/21", periods=10))
+            >>> assert target_check.validate(X, y) == [
             ...     {
             ...         "message": "Target is unsupported datetime type. Valid Woodwork logical types include: integer, double, age, age_fractional",
             ...         "data_check_name": "DistributionDataCheck",
@@ -78,7 +76,7 @@ class DistributionDataCheck(DataCheck):
         if y is None:
             messages.append(
                 DataCheckError(
-                    message="Target is None",
+                    message="Data is None",
                     data_check_name=self.name,
                     message_code=DataCheckMessageCode.TARGET_IS_NONE,
                     details={},
@@ -104,7 +102,7 @@ class DistributionDataCheck(DataCheck):
                     ),
                     data_check_name=self.name,
                     message_code=DataCheckMessageCode.TARGET_UNSUPPORTED_TYPE,
-                    details={"unsupported_type": y.ww.logical_type.type_string},
+                    details={"unsupported_type": X.ww.logical_type.type_string},
                 ).to_dict(),
             )
             return messages
@@ -114,7 +112,7 @@ class DistributionDataCheck(DataCheck):
             distribution_type,
             skew_value,
             coef,
-        ) = _detect_skew_distribution_helper(y)
+        ) = _detect_skew_distribution_helper(X)
 
         if is_skew:
             details = {
@@ -124,16 +122,16 @@ class DistributionDataCheck(DataCheck):
             }
             messages.append(
                 DataCheckWarning(
-                    message="Target may have a skewed distribution.",
+                    message="Data may have a skewed distribution.",
                     data_check_name=self.name,
-                    message_code=DataCheckMessageCode.TARGET_SKEWED_DISTRIBUTION,
+                    message_code=DataCheckMessageCode.SKEWED_DISTRIBUTION,
                     details=details,
                     action_options=[
                         DataCheckActionOption(
                             DataCheckActionCode.TRANSFORM_TARGET,
                             data_check_name=self.name,
                             metadata={
-                                "is_target": True,
+                                "is_skew": True,
                                 "transformation_strategy": "yeojohnson",
                             },
                         ),
@@ -143,10 +141,10 @@ class DistributionDataCheck(DataCheck):
         return messages
 
 
-def _detect_skew_distribution_helper(y):
+def _detect_skew_distribution_helper(X):
     """Helper method to detect skewed or bimodal distribution. Returns boolean, distribution type, the skew value, and bimodal coefficient."""
-    skew_value = np.stats.skew(y)
-    coef = diptest.diptest(y)[1]
+    skew_value = np.stats.skew(X)
+    coef = diptest.diptest(X)[1]
 
     if coef < 0.05:
         return True, "bimodal distribution", skew_value, coef
