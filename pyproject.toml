@@ -15,6 +15,8 @@ dependencies = [
     "woodwork>=0.22.0",
     "click>=8.0.0",
     "black[jupyter]>=22.3.0",
+    "diptest>=0.5.2",
+    "scipy>=1.9.3",
 ]
 requires-python = ">=3.8,<4.0"
 readme = "README.md"

@@ -4,6 +4,7 @@ from abc import abstractmethod
 import pandas as pd
 import woodwork
 from sklearn.impute import SimpleImputer as SkImputer
+from scipy.stats import yeojohnson
 
 from checkmates.exceptions import MethodPropertyNotFoundError
 from checkmates.pipelines import ComponentBase
@@ -81,6 +82,55 @@ class Transformer(ComponentBase):
 
     def _get_feature_provenance(self):
         return {}
+
+"""Component that normalizes skewed distributions using the Yeo-Johnson method"""
+class SimpleNormalizer(Transformer):
+    """Normalizes skewed data according to the Yeo-Johnson method.
+
+    Args:
+        impute_strategy (string): Impute strategy to use. Valid values include "mean", "median", "most_frequent", "constant" for
+           numerical data, and "most_frequent", "constant" for object data types.
+        fill_value (string): When impute_strategy == "constant", fill_value is used to replace missing data.
+           Defaults to 0 when imputing numerical data and "missing_value" for strings or object data types.
+        random_seed (int): Seed for the random number generator. Defaults to 0.
+
+    """
+
+    def __init__(
+        self
+    ):
+        super().__init__(
+            parameters=None,
+        )
+
+    def transform(self, X, y=None):
+        """Transforms input by normalizing distribution.
+
+        Args:
+            X (pd.DataFrame): Data to transform.
+            y (pd.Series, optional): Ignored.
+
+        Returns:
+            pd.DataFrame: Transformed X
+        """
+
+        # Transform the data
+        X_t = yeojohnson(X_t)
+
+        # Reinit woodwork
+        X_t.ww.init()
+
+    def fit_transform(self, X, y=None):
+        """Fits on X and transforms X.
+
+        Args:
+            X (pd.DataFrame): Data to fit and transform
+            y (pd.Series, optional): Target data.
+
+        Returns:
+            pd.DataFrame: Transformed X
+        """
+        return self.fit(X, y).transform(X, y)
 
 
 """Component that imputes missing data according to a specified imputation strategy."""
