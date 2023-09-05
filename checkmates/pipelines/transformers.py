@@ -100,7 +100,7 @@ class SimpleNormalizer(Transformer):
 
         Args:
             X (pd.DataFrame): Data to transform.
-            y (pd.Series, optional):
+            y (pd.Series, optional): Target Data
 
         Returns:
             pd.DataFrame: Transformed X
