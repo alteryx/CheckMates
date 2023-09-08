@@ -105,6 +105,12 @@ class SimpleNormalizer(Transformer):
         Returns:
             pd.DataFrame: Transformed X
         """
+
+        # If there are no columns to normalize, return early
+        if not self._cols_to_normalize:
+            return self
+
+        X = X[self._cols_to_normalize]
         # Transform the data
         X_t = yeojohnson(X)
 

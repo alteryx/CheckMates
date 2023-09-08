@@ -19,6 +19,9 @@ class DataCheckActionCode(Enum):
     TRANSFORM_TARGET = "transform_target"
     """Action code for transforming the target data."""
 
+    TRANSFORM_FEATURES = "transform_features"
+    """Action code for transforming the features data."""
+
     REGULARIZE_AND_IMPUTE_DATASET = "regularize_and_impute_dataset"
     """Action code for regularizing and imputing all features and target time series data."""
 

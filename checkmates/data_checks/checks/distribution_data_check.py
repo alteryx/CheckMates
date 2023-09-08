@@ -1,18 +1,15 @@
-"""Data check that checks if the target data contains certain distributions that may need to be transformed prior training to improve model performance."""
-import diptest
-import numpy as np
+"""Data check that screens data for skewed or bimodal distrbutions prior to model training to ensure model performance is unaffected."""
 import woodwork as ww
 
 from checkmates.data_checks import (
     DataCheck,
     DataCheckActionCode,
     DataCheckActionOption,
-    DataCheckError,
     DataCheckMessageCode,
     DataCheckWarning,
 )
-from checkmates.utils import infer_feature_types
-
+from scipy.stats import skew
+from diptest import diptest
 
 class DistributionDataCheck(DataCheck):
     """Check if the overall data contains certain distributions that may need to be transformed prior training to improve model performance. Uses the skew test and yeojohnson transformation."""
@@ -43,7 +40,7 @@ class DistributionDataCheck(DataCheck):
             ...         "details": {"distribution type": "positive skew", "Skew Value": 0.7939, "Bimodal Coefficient": 1.0,},
             ...         "action_options": [
             ...             {
-            ...                 "code": "TRANSFORM_TARGET",
+            ...                 "code": "TRANSFORM_FEATURES",
             ...                 "data_check_name": "DistributionDataCheck",
             ...                 "parameters": {},
             ...                 "metadata": {
@@ -54,97 +51,51 @@ class DistributionDataCheck(DataCheck):
             ...         ]
             ...     }
             ... ]
-            ...
-            >>> X = pd.Series([1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 5])
-            >>> assert target_check.validate(X, y) == []
-            ...
-            ...
-            >>> X = pd.Series(pd.date_range("1/1/21", periods=10))
-            >>> assert target_check.validate(X, y) == [
-            ...     {
-            ...         "message": "Target is unsupported datetime type. Valid Woodwork logical types include: integer, double, age, age_fractional",
-            ...         "data_check_name": "DistributionDataCheck",
-            ...         "level": "error",
-            ...         "details": {"columns": None, "rows": None, "unsupported_type": "datetime"},
-            ...         "code": "TARGET_UNSUPPORTED_TYPE",
-            ...         "action_options": []
-            ...     }
-            ... ]
         """
         messages = []
 
-        if y is None:
-            messages.append(
-                DataCheckError(
-                    message="Data is None",
-                    data_check_name=self.name,
-                    message_code=DataCheckMessageCode.TARGET_IS_NONE,
-                    details={},
-                ).to_dict(),
-            )
-            return messages
+        numeric_X = X.ww.select(["Integer", "Double"])
 
-        y = infer_feature_types(y)
-        allowed_types = [
-            ww.logical_types.Integer.type_string,
-            ww.logical_types.Double.type_string,
-            ww.logical_types.Age.type_string,
-            ww.logical_types.AgeFractional.type_string,
-        ]
-        is_supported_type = y.ww.logical_type.type_string in allowed_types
+        for col in numeric_X:
+            (
+                is_skew,
+                distribution_type,
+                skew_value,
+                coef,
+            ) = _detect_skew_distribution_helper(col)
 
-        if not is_supported_type:
-            messages.append(
-                DataCheckError(
-                    message="Target is unsupported {} type. Valid Woodwork logical types include: {}".format(
-                        y.ww.logical_type.type_string,
-                        ", ".join([ltype for ltype in allowed_types]),
-                    ),
-                    data_check_name=self.name,
-                    message_code=DataCheckMessageCode.TARGET_UNSUPPORTED_TYPE,
-                    details={"unsupported_type": X.ww.logical_type.type_string},
-                ).to_dict(),
-            )
-            return messages
-
-        (
-            is_skew,
-            distribution_type,
-            skew_value,
-            coef,
-        ) = _detect_skew_distribution_helper(X)
-
-        if is_skew:
-            details = {
-                "distribution type": distribution_type,
-                "Skew Value": skew_value,
-                "Bimodal Coefficient": coef,
-            }
-            messages.append(
-                DataCheckWarning(
-                    message="Data may have a skewed distribution.",
-                    data_check_name=self.name,
-                    message_code=DataCheckMessageCode.SKEWED_DISTRIBUTION,
-                    details=details,
-                    action_options=[
-                        DataCheckActionOption(
-                            DataCheckActionCode.TRANSFORM_TARGET,
-                            data_check_name=self.name,
-                            metadata={
-                                "is_skew": True,
-                                "transformation_strategy": "yeojohnson",
-                            },
-                        ),
-                    ],
-                ).to_dict(),
-            )
+            if is_skew:
+                details = {
+                    "distribution type": distribution_type,
+                    "Skew Value": skew_value,
+                    "Bimodal Coefficient": coef,
+                }
+                messages.append(
+                    DataCheckWarning(
+                        message="Data may have a skewed distribution.",
+                        data_check_name=self.name,
+                        message_code=DataCheckMessageCode.SKEWED_DISTRIBUTION,
+                        details=details,
+                        action_options=[
+                            DataCheckActionOption(
+                                DataCheckActionCode.TRANSFORM_FEATURES,
+                                data_check_name=self.name,
+                                metadata={
+                                    "is_skew": True,
+                                    "transformation_strategy": "yeojohnson",
+                                    "columns" : col
+                                },
+                            ),
+                        ],
+                    ).to_dict(),
+                )
         return messages
 
 
 def _detect_skew_distribution_helper(X):
     """Helper method to detect skewed or bimodal distribution. Returns boolean, distribution type, the skew value, and bimodal coefficient."""
-    skew_value = np.stats.skew(X)
-    coef = diptest.diptest(X)[1]
+    skew_value = skew(X)
+    coef = diptest(X)[1]
 
     if coef < 0.05:
         return True, "bimodal distribution", skew_value, coef
@@ -153,3 +104,54 @@ def _detect_skew_distribution_helper(X):
     if skew_value > 0.5:
         return True, "positive skew", skew_value, coef
     return False, "no skew", skew_value, coef
+
+
+# Testing Data to make sure skews are recognized-- successful
+# import numpy as np
+# import pandas as pd
+# data = {
+#     'Column1': np.random.normal(0, 1, 1000),  # Normally distributed data
+#     'Column2': np.random.exponential(1, 1000),  # Right-skewed data
+#     'Column3': np.random.gamma(2, 2, 1000)  # Right-skewed data
+# }
+
+# df = pd.DataFrame(data)
+# df.ww.init()
+# messages = []
+
+# numeric_X = df.ww.select(["Integer", "Double"])
+# print(numeric_X)
+# for col in numeric_X:
+#     (
+#         is_skew,
+#         distribution_type,
+#         skew_value,
+#         coef,
+#     ) = _detect_skew_distribution_helper(numeric_X['Column2'])
+
+#     if is_skew:
+#         details = {
+#             "distribution type": distribution_type,
+#             "Skew Value": skew_value,
+#             "Bimodal Coefficient": coef,
+#         }
+#         messages.append(
+#             DataCheckWarning(
+#                 message="Data may have a skewed distribution.",
+#                 data_check_name="Distribution Data Check",
+#                 message_code=DataCheckMessageCode.SKEWED_DISTRIBUTION,
+#                 details=details,
+#                 action_options=[
+#                     DataCheckActionOption(
+#                         DataCheckActionCode.TRANSFORM_FEATURES,
+#                         data_check_name="Distribution Data Check",
+#                         metadata={
+#                             "is_skew": True,
+#                             "transformation_strategy": "yeojohnson",
+#                             "columns" : col
+#                         },
+#                     ),
+#                 ],
+#             ).to_dict(),
+#         )
+# print(messages)
