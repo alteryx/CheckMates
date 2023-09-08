@@ -110,7 +110,7 @@ class SimpleNormalizer(Transformer):
         if not self._cols_to_normalize:
             return self
 
-        #Only select the skewed column to normalize
+        # Only select the skewed column to normalize
         x_t = X[self._cols_to_normalize]
         X_t = X
 

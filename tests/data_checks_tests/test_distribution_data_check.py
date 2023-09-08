@@ -5,13 +5,13 @@ from diptest import diptest
 from scipy.stats import skew
 
 from checkmates.data_checks import (
-    DataCheck,
     DataCheckActionCode,
     DataCheckActionOption,
     DataCheckMessageCode,
     DataCheckWarning,
-    DistributionDataCheck
 )
+
+
 def _detect_skew_distribution_helper(X):
     """Helper method to detect skewed or bimodal distribution. Returns boolean, distribution type, the skew value, and bimodal coefficient."""
     skew_value = skew(X)
@@ -27,9 +27,9 @@ def _detect_skew_distribution_helper(X):
 
 
 data = {
-    'Column1': np.random.normal(0, 1, 1000),  # Normally distributed data
-    'Column2': np.random.exponential(1, 1000),  # Right-skewed data
-    'Column3': 1 / (np.random.gamma(2, 2, 1000))  # Left-skewed data
+    "Column1": np.random.normal(0, 1, 1000),  # Normally distributed data
+    "Column2": np.random.exponential(1, 1000),  # Right-skewed data
+    "Column3": 1 / (np.random.gamma(2, 2, 1000)),  # Left-skewed data
 }
 
 df = pd.DataFrame(data)
@@ -44,7 +44,7 @@ for col in numeric_X:
         distribution_type,
         skew_value,
         coef,
-    ) = _detect_skew_distribution_helper(numeric_X['Column2'])
+    ) = _detect_skew_distribution_helper(numeric_X["Column2"])
 
     if is_skew:
         details = {
@@ -65,11 +65,10 @@ for col in numeric_X:
                         metadata={
                             "is_skew": True,
                             "transformation_strategy": "yeojohnson",
-                            "columns" : col
+                            "columns": col,
                         },
                     ),
                 ],
             ).to_dict(),
         )
 print(messages)
-
