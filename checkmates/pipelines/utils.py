@@ -70,7 +70,7 @@ def _make_component_list_from_actions(actions):
         indices_to_drop = sorted(set(indices_to_drop))
         components.append(DropRowsTransformer(indices_to_drop=indices_to_drop))
     if cols_to_normalize:
-        cols_to_normalize = sorted(set(cols_to_normalize))
+        cols_to_normalize = set(cols_to_normalize)
         components.append(SimpleNormalizer(columns=cols_to_normalize))
 
     return components

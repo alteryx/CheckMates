@@ -52,6 +52,8 @@ from checkmates.data_checks.checks.multicollinearity_data_check import (
 from checkmates.data_checks.checks.invalid_target_data_check import (
     InvalidTargetDataCheck,
 )
-
+from checkmates.data_checks.checks.distribution_data_check import (
+    DistributionDataCheck
+)
 
 from checkmates.data_checks.datacheck_meta.utils import handle_data_check_action_code

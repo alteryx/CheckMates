@@ -2,7 +2,7 @@
 
 from checkmates.pipelines.component_base_meta import ComponentBaseMeta
 from checkmates.pipelines.component_base import ComponentBase
-from checkmates.pipelines.transformers import Transformer
+from checkmates.pipelines.transformers import Transformer, SimpleNormalizer
 from checkmates.pipelines.components import (  # noqa: F401
     DropColumns,
     DropRowsTransformer,

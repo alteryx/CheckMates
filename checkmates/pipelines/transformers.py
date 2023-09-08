@@ -93,6 +93,7 @@ class SimpleNormalizer(Transformer):
     def __init__(self):
         super().__init__(
             parameters=None,
+            _cols_to_normalize=None,
         )
 
     def transform(self, X, y=None):
@@ -109,9 +110,12 @@ class SimpleNormalizer(Transformer):
         if not self._cols_to_normalize:
             return self
 
-        X = X[self._cols_to_normalize]
+        #Only select the skewed column to normalize
+        x_t = X[self._cols_to_normalize]
+        X_t = X
+
         # Transform the data
-        X_t = yeojohnson(X)
+        X_t[self._cols_to_normalize] = yeojohnson(x_t)
 
         # Reinit woodwork
         X_t.ww.init()
