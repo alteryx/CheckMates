@@ -1,5 +1,7 @@
 """Data check that screens data for skewed or bimodal distrbutions prior to model training to ensure model performance is unaffected."""
-import woodwork as ww
+
+from diptest import diptest
+from scipy.stats import skew
 
 from checkmates.data_checks import (
     DataCheck,
@@ -8,8 +10,7 @@ from checkmates.data_checks import (
     DataCheckMessageCode,
     DataCheckWarning,
 )
-from scipy.stats import skew
-from diptest import diptest
+
 
 class DistributionDataCheck(DataCheck):
     """Check if the overall data contains certain distributions that may need to be transformed prior training to improve model performance. Uses the skew test and yeojohnson transformation."""
@@ -83,7 +84,7 @@ class DistributionDataCheck(DataCheck):
                                 metadata={
                                     "is_skew": True,
                                     "transformation_strategy": "yeojohnson",
-                                    "columns" : col
+                                    "columns": col,
                                 },
                             ),
                         ],

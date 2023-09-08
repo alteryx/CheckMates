@@ -34,7 +34,6 @@ def _make_component_list_from_actions(actions):
     indices_to_drop = []
     cols_to_normalize = []
 
-
     for action in actions:
         if action.action_code == DataCheckActionCode.REGULARIZE_AND_IMPUTE_DATASET:
             metadata = action.metadata

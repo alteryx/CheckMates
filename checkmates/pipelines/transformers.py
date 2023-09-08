@@ -105,7 +105,6 @@ class SimpleNormalizer(Transformer):
         Returns:
             pd.DataFrame: Transformed X
         """
-
         # If there are no columns to normalize, return early
         if not self._cols_to_normalize:
             return self
