@@ -3,6 +3,7 @@ from abc import abstractmethod
 
 import pandas as pd
 import woodwork
+from scipy.stats import yeojohnson
 from sklearn.impute import SimpleImputer as SkImputer
 
 from checkmates.exceptions import MethodPropertyNotFoundError
@@ -81,6 +82,55 @@ class Transformer(ComponentBase):
 
     def _get_feature_provenance(self):
         return {}
+
+
+"""Component that normalizes skewed distributions using the Yeo-Johnson method"""
+
+
+class SimpleNormalizer(Transformer):
+    """Normalizes skewed data according to the Yeo-Johnson method."""
+
+    def __init__(self):
+        super().__init__(
+            parameters=None,
+            _cols_to_normalize=None,
+        )
+
+    def transform(self, X, y=None):
+        """Transforms input by normalizing distribution.
+
+        Args:
+            X (pd.DataFrame): Data to transform.
+            y (pd.Series, optional): Target Data
+
+        Returns:
+            pd.DataFrame: Transformed X
+        """
+        # If there are no columns to normalize, return early
+        if not self._cols_to_normalize:
+            return self
+
+        # Only select the skewed column to normalize
+        x_t = X[self._cols_to_normalize]
+        X_t = X
+
+        # Transform the data
+        X_t[self._cols_to_normalize] = yeojohnson(x_t)
+
+        # Reinit woodwork
+        X_t.ww.init()
+
+    def fit_transform(self, X, y=None):
+        """Fits on X and transforms X.
+
+        Args:
+            X (pd.DataFrame): Data to fit and transform
+            y (pd.Series, optional): Target data.
+
+        Returns:
+            pd.DataFrame: Transformed X
+        """
+        return self.fit(X, y).transform(X, y)
 
 
 """Component that imputes missing data according to a specified imputation strategy."""

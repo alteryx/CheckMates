@@ -15,6 +15,7 @@ from checkmates.pipelines.components import (  # noqa: F401
     TimeSeriesRegularizer,
 )
 from checkmates.pipelines.training_validation_split import TrainingValidationSplit
+from checkmates.pipelines.transformers import SimpleNormalizer
 from checkmates.problem_types import is_classification, is_regression, is_time_series
 from checkmates.utils import infer_feature_types
 
@@ -31,6 +32,7 @@ def _make_component_list_from_actions(actions):
     components = []
     cols_to_drop = []
     indices_to_drop = []
+    cols_to_normalize = []
 
     for action in actions:
         if action.action_code == DataCheckActionCode.REGULARIZE_AND_IMPUTE_DATASET:
@@ -47,6 +49,8 @@ def _make_component_list_from_actions(actions):
             )
         elif action.action_code == DataCheckActionCode.DROP_COL:
             cols_to_drop.extend(action.metadata["columns"])
+        elif action.action_code == DataCheckActionCode.TRANSFORM_FEATURES:
+            cols_to_normalize.extend(action.metadata["columns"])
         elif action.action_code == DataCheckActionCode.IMPUTE_COL:
             metadata = action.metadata
             parameters = metadata.get("parameters", {})
@@ -65,6 +69,9 @@ def _make_component_list_from_actions(actions):
     if indices_to_drop:
         indices_to_drop = sorted(set(indices_to_drop))
         components.append(DropRowsTransformer(indices_to_drop=indices_to_drop))
+    if cols_to_normalize:
+        cols_to_normalize = set(cols_to_normalize)
+        components.append(SimpleNormalizer(columns=cols_to_normalize))
 
     return components
 
